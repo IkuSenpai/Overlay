@@ -1,0 +1,30 @@
+{
+    "name":  "tft-overlay",
+    "version":  "0.1.0",
+    "private":  true,
+    "description":  "A desktop companion and in-game overlay for Teamfight Tactics.",
+    "license":  "UNLICENSED",
+    "packageManager":  "npm@11.13.0",
+    "engines":  {
+                    "node":  "\u003e=24.16.0",
+                    "npm":  "\u003e=11.0.0"
+                },
+    "workspaces":  [
+                       "apps/*",
+                       "packages/*"
+                   ],
+    "scripts":  {
+                    "dev":  "npm run dev --workspace=@tft-overlay/desktop",
+                    "dev:desktop":  "npm run dev --workspace=@tft-overlay/desktop",
+                    "dev:api":  "npm run dev --workspace=@tft-overlay/api",
+                    "build":  "npm run build --workspaces --if-present",
+                    "typecheck":  "npm run typecheck --workspaces --if-present",
+                    "lint":  "npm run lint --workspaces --if-present",
+                    "test":  "npm run test --workspaces --if-present"
+                },
+    "overrides":  {
+                      "vite@7.3.5":  {
+                                         "esbuild":  "0.27.2"
+                                     }
+                  }
+}

@@ -1,0 +1,28 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "types": [
+      "node",
+      "electron"
+    ],
+    "paths": {
+      "@main/*": [
+        "./src/main/*"
+      ],
+      "@preload/*": [
+        "./src/preload/*"
+      ],
+      "@renderer/*": [
+        "./src/renderer/*"
+      ]
+    }
+  },
+  "include": [
+    "electron.vite.config.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts"
+  ]
+}
+
