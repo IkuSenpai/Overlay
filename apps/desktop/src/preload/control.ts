@@ -1,4 +1,5 @@
-﻿import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
+import { ipcChannels } from '../shared/ipc-channels'
 
 contextBridge.exposeInMainWorld('desktopApi', {
   runtime: {
@@ -6,5 +7,19 @@ contextBridge.exposeInMainWorld('desktopApi', {
     chromium: process.versions.chrome,
     node: process.versions.node,
     platform: process.platform
+  },
+
+  overlay: {
+    getState: () =>
+      ipcRenderer.invoke(ipcChannels.overlay.getState),
+
+    show: () =>
+      ipcRenderer.invoke(ipcChannels.overlay.show),
+
+    hide: () =>
+      ipcRenderer.invoke(ipcChannels.overlay.hide),
+
+    toggle: () =>
+      ipcRenderer.invoke(ipcChannels.overlay.toggle)
   }
 })

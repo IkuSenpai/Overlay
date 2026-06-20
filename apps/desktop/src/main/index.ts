@@ -1,4 +1,5 @@
-﻿import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow } from 'electron'
+import { registerIpcHandlers } from './ipc/register-ipc'
 import { createControlWindow } from './windows/control-window'
 import { createOverlayWindow } from './windows/overlay-window'
 
@@ -6,8 +7,10 @@ let controlWindow: BrowserWindow | null = null
 let overlayWindow: BrowserWindow | null = null
 
 function createApplicationWindows(): void {
-  controlWindow = createControlWindow()
   overlayWindow = createOverlayWindow()
+  controlWindow = createControlWindow()
+
+  registerIpcHandlers(overlayWindow)
 
   controlWindow.on('closed', () => {
     controlWindow = null

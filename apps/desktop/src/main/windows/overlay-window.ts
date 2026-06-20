@@ -4,6 +4,32 @@ import { dirname, join } from 'node:path'
 
 const currentDirectory = dirname(fileURLToPath(import.meta.url))
 
+function enforceOverlayZOrder(window: BrowserWindow): void {
+  if (window.isDestroyed()) {
+    return
+  }
+
+  window.setAlwaysOnTop(true, 'screen-saver')
+  window.moveTop()
+}
+
+export function showOverlayWindow(
+  window: BrowserWindow
+): void {
+  if (window.isDestroyed()) {
+    return
+  }
+
+  window.showInactive()
+  enforceOverlayZOrder(window)
+
+  setTimeout(() => {
+    if (window.isVisible()) {
+      enforceOverlayZOrder(window)
+    }
+  }, 50)
+}
+
 export function createOverlayWindow(): BrowserWindow {
   const display = screen.getPrimaryDisplay()
 
@@ -36,8 +62,21 @@ export function createOverlayWindow(): BrowserWindow {
     }
   })
 
-  window.setAlwaysOnTop(true, 'screen-saver')
   window.setIgnoreMouseEvents(true, { forward: true })
+  enforceOverlayZOrder(window)
+
+  window.on('show', () => {
+    enforceOverlayZOrder(window)
+  })
+
+  window.on(
+    'always-on-top-changed',
+    (_event, isAlwaysOnTop) => {
+      if (!isAlwaysOnTop && window.isVisible()) {
+        enforceOverlayZOrder(window)
+      }
+    }
+  )
 
   const rendererUrl = process.env.ELECTRON_RENDERER_URL
 
@@ -51,4 +90,3 @@ export function createOverlayWindow(): BrowserWindow {
 
   return window
 }
-

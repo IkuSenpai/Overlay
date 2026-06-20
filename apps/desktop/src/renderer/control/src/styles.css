@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   color: #f7fbff;
   background: #07101d;
   font-family:
@@ -202,5 +202,133 @@ h1 {
 
   .feature-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.overlay-control-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 20px;
+  padding: 26px 28px;
+  border: 1px solid rgba(60, 174, 255, 0.3);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(12, 39, 65, 0.88),
+      rgba(8, 26, 44, 0.74)
+    );
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.2),
+    inset 0 0 30px rgba(42, 155, 255, 0.04);
+}
+
+.overlay-control-copy h2 {
+  margin-bottom: 8px;
+  font-size: 23px;
+}
+
+.overlay-control-copy p:last-child {
+  max-width: 520px;
+  margin-bottom: 0;
+  color: #8da2b7;
+  line-height: 1.6;
+}
+
+.overlay-control-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.overlay-state {
+  min-width: 68px;
+  color: #7890a8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.overlay-state-visible {
+  color: #71caff;
+  text-shadow: 0 0 12px rgba(54, 174, 255, 0.55);
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 42px;
+  padding: 0 17px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 800;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.primary-button {
+  border: 1px solid rgba(77, 190, 255, 0.88);
+  color: #effaff;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(31, 157, 255, 0.92),
+      rgba(13, 102, 211, 0.92)
+    );
+  box-shadow: 0 0 22px rgba(29, 142, 255, 0.28);
+}
+
+.secondary-button {
+  border: 1px solid rgba(91, 142, 181, 0.3);
+  color: #a9bfd3;
+  background: rgba(8, 24, 41, 0.76);
+}
+
+.primary-button:hover:not(:disabled),
+.secondary-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.primary-button:hover:not(:disabled) {
+  box-shadow: 0 0 28px rgba(29, 142, 255, 0.42);
+}
+
+.secondary-button:hover:not(:disabled) {
+  border-color: rgba(85, 183, 244, 0.48);
+  color: #d9f1ff;
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+.overlay-error {
+  position: absolute;
+  right: 28px;
+  bottom: 7px;
+  margin: 0;
+  color: #ff9d9d;
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .overlay-control-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .overlay-control-actions {
+    width: 100%;
+    flex-wrap: wrap;
   }
 }

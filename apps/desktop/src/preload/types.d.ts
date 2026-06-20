@@ -1,4 +1,8 @@
-﻿export {}
+import type {
+  OverlayWindowState
+} from '../shared/ipc-channels'
+
+export {}
 
 interface RuntimeInformation {
   electron: string
@@ -7,8 +11,16 @@ interface RuntimeInformation {
   platform: NodeJS.Platform
 }
 
+interface OverlayControls {
+  getState: () => Promise<OverlayWindowState>
+  show: () => Promise<OverlayWindowState>
+  hide: () => Promise<OverlayWindowState>
+  toggle: () => Promise<OverlayWindowState>
+}
+
 interface DesktopApi {
   runtime: RuntimeInformation
+  overlay: OverlayControls
 }
 
 interface OverlayApi {
